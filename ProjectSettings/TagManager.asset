@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - WeakPoint
   - Checkpoint
+  - LevelEnd
+  - PoisonedCherry
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - TileMap
   - 
   - 
   - 
@@ -43,6 +45,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 3123995143
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

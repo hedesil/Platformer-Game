@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool isAlive = true;
 
     public GameManager manager;
+    public Animator animator;
 
 
     // Start is called before the first frame update
@@ -32,7 +33,29 @@ public class PlayerController : MonoBehaviour
         // Player Jump
         if (Input.GetButtonDown("Jump") && isAlive == true)
         {
+            if (movement.m_Grounded)
+            {
+                animator.SetTrigger("Jump");
+            }
             movement.Jump();
+        }
+
+        // Set Animations
+        animator.SetBool("Grounded", movement.m_Grounded);
+        animator.SetBool("IsAlive", isAlive);
+
+        if (horizontalInput == 0)
+        {
+            animator.speed = 1f;
+            animator.SetBool("Move", false);
+        }
+        else
+        {
+            if (isAlive && movement.m_Grounded)
+            {
+                animator.speed = 1 * Mathf.Abs(horizontalInput); // Hacer que con un gamePad la velocidad sea progresiva
+            }
+            animator.SetBool("Move", true);
         }
     }
 
@@ -57,6 +80,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             isAlive = false;
+            animator.SetTrigger("Die");
             Debug.Log("Te la comiste");
         }
 
@@ -74,9 +98,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Spikes") || collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("PoisonedCherry"))
+        if (collision.gameObject.CompareTag("Spikes") || collision.gameObject.CompareTag("Enemy"))
         {
-            isAlive = false;
+            if (isAlive)
+            {
+                isAlive = false;
+                animator.SetTrigger("Die"); // Pasamos el trigger para que el animator lance el trigger Die
+            }
         }
 
         if (collision.gameObject.CompareTag("WeakPoint"))
