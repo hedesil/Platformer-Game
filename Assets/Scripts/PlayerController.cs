@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public PlayerMovement movement;
     public bool isAlive = true;
 
+    public GameManager manager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,14 +49,40 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Cherry"))
         {
             Destroy(collision.gameObject);
+            manager.totalCoins++;
+
+        }
+
+        if (collision.gameObject.CompareTag("PoisonedCherry"))
+        {
+            Destroy(collision.gameObject);
+            isAlive = false;
+            Debug.Log("Te la comiste");
+        }
+
+
+        if (collision.gameObject.CompareTag("Checkpoint"))
+        {
+            manager.spawnPoint = collision.gameObject.transform; // Al spawn le asignamos la posición del nuevo cartel
+        }
+
+        if (collision.gameObject.CompareTag("LevelEnd"))
+        {
+            manager.FinishLevel();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Spikes") || collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Spikes") || collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("PoisonedCherry"))
         {
             isAlive = false;
+        }
+
+        if (collision.gameObject.CompareTag("WeakPoint"))
+        {
+            collision.transform.parent.GetComponent<BoxCollider2D>().enabled = false; // Desactivamos el boxCollider del enemigo para que no nos mate si tocamos sin querer después de matarlo
+            Destroy(collision.transform.parent.gameObject);
         }
     }
 
