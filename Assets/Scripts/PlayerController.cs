@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
         isAlive = false;
         animator.SetTrigger("Die"); // Pasamos el trigger para que el animator lance el trigger Die

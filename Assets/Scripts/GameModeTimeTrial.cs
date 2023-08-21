@@ -15,7 +15,7 @@ public class GameModeTimeTrial : MonoBehaviour
         } else {
             if(gameManager.isGameOver == false) {
                 gameManager.isGameOver = true;
-                gameManager.Die();
+                gameManager.player.Die();
             }
         }
     }
