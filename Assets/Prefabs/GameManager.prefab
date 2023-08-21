@@ -50,3 +50,5 @@ MonoBehaviour:
   player: {fileID: 0}
   timeToRespawn: 1.5
   timer: 0
+  isGameOver: 0
+  isLevelFinished: 0
