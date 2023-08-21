@@ -12,7 +12,7 @@ public class GameModeCoins : MonoBehaviour
     {
         cherries = GameObject.FindGameObjectsWithTag("Cherry");
         if (cherries.Length == 0) {
-            gameManager.FinishLevel;
+            gameManager.FinishLevel();
         }
     }
 }
