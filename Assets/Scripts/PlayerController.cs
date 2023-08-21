@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool isAlive = true;
 
     public GameManager manager;
-    
+
     public Animator animator;
 
     public AudioSource audioSource;
@@ -109,9 +109,7 @@ public class PlayerController : MonoBehaviour
         {
             if (isAlive)
             {
-                isAlive = false;
-                animator.SetTrigger("Die"); // Pasamos el trigger para que el animator lance el trigger Die
-                audioSource.PlayOneShot(hurtSound, 1f);
+                Die();
             }
         }
 
@@ -122,4 +120,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Die()
+    {
+        isAlive = false;
+        animator.SetTrigger("Die"); // Pasamos el trigger para que el animator lance el trigger Die
+        audioSource.PlayOneShot(hurtSound, 1f);
+    }
 }

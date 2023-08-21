@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Game Over");
+                    isGameOver = true;
                 }
             }
         }
