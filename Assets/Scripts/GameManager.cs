@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,9 @@ public class GameManager : MonoBehaviour
     public float timer = 0;
     public bool isGameOver = false;
     public bool isLevelFinished = false;
+    public TextMeshProUGUI lifesText;
+    public GameObject levelEndPanel;
+    public TextMeshProUGUI levelEndText;
 
     // Start is called before the first frame update
     void Start()
@@ -47,11 +52,21 @@ public class GameManager : MonoBehaviour
 
         if (isGameOver == true || isLevelFinished == true)
         {
+            levelEndPanel.SetActive(true); // Activamos el panel del game over
+
+            if(isGameOver) {
+                levelEndText.text = "GAME OVER";
+            } else if (isLevelFinished) {
+                levelEndText.text = "FINISHED";
+            }
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 // Load Main Menu
             }
         }
+
+        lifesText.text = "x" + lives;
     }
 
     public void FinishLevel()
