@@ -14,8 +14,13 @@ public class PlayerController : MonoBehaviour
     public bool isAlive = true;
 
     public GameManager manager;
+    
     public Animator animator;
 
+    public AudioSource audioSource;
+    public AudioClip coinSound;
+    public AudioClip hurtSound;
+    public AudioClip jumpSound;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +40,11 @@ public class PlayerController : MonoBehaviour
         {
             if (movement.m_Grounded)
             {
+                Debug.Log("ACTIVAR TRIGGER SALTO");
                 animator.SetTrigger("Jump");
             }
             movement.Jump();
+            audioSource.PlayOneShot(jumpSound, 1f);
         }
 
         // Set Animations
@@ -73,7 +80,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             manager.totalCoins++;
-
+            audioSource.PlayOneShot(coinSound, 1f);
         }
 
         if (collision.gameObject.CompareTag("PoisonedCherry"))
@@ -104,6 +111,7 @@ public class PlayerController : MonoBehaviour
             {
                 isAlive = false;
                 animator.SetTrigger("Die"); // Pasamos el trigger para que el animator lance el trigger Die
+                audioSource.PlayOneShot(hurtSound, 1f);
             }
         }
 

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     public float timeToRespawn = 2f;
     public float timer = 0;
+    public bool isGameOver = false;
+    public bool isLevelFinished = false;
 
     // Start is called before the first frame update
     void Start()
@@ -42,11 +44,19 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        if (isGameOver == true || isLevelFinished == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                // Load Main Menu
+            }
+        }
     }
 
     public void FinishLevel()
     {
-        Debug.Log("Level finished");
+        isLevelFinished = true;
     }
 }
 
