@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/01 TestLevel.unity
     guid: 74c577bc031421a46831a81d10cce317
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BukkaLevel_1.unity
     guid: 54ea7a3470227d342b6c8535be156689
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LevelCoins.unity
     guid: 3990cb97ecc15d442ac3f54fe264b4ca
   m_configObjects: {}

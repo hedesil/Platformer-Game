@@ -35,15 +35,15 @@ public class EnemyController : MonoBehaviour
             gameObject.transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
 
-        if (transform.position.x > positionRight)
+        if (transform.position.x >= positionRight)
         {
             spriteRenderer.flipX = true;
             isMovingRight = false;
         }
 
-        if (transform.position.x < positionLeft)
+        if (transform.position.x <=  positionLeft)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = false;
             isMovingRight = true;
         }
 
