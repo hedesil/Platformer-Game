@@ -53,11 +53,17 @@ public class GameManager : MonoBehaviour
 
         if (isGameOver == true || isLevelFinished == true)
         {
+            Rigidbody2D playerPhysic = player.GetComponent<Rigidbody2D>();
+            playerPhysic.velocity = Vector2.zero; 
+
             levelEndPanel.SetActive(true); // Activamos el panel del game over
 
-            if(isGameOver) {
+            if (isGameOver)
+            {
                 levelEndText.text = "GAME OVER";
-            } else if (isLevelFinished) {
+            }
+            else if (isLevelFinished)
+            {
                 levelEndText.text = "FINISHED";
             }
 

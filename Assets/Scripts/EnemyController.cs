@@ -6,10 +6,10 @@ public class EnemyController : MonoBehaviour
 {
     public float speed = 2f;
     public float distance = 3f;
-    
+
     private float positionLeft;
     private float positionRight;
-
+    public Animator animator;
 
     private bool isMovingRight = true;
     public SpriteRenderer spriteRenderer;
@@ -25,20 +25,27 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isMovingRight) {
+        animator.SetBool("Movement", true);
+        if (isMovingRight)
+        {
             gameObject.transform.Translate(Vector2.right * speed * Time.deltaTime);
-        } else {
+        }
+        else
+        {
             gameObject.transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
 
-        if(transform.position.x > positionRight) {
-            spriteRenderer.flipX = false;
+        if (transform.position.x > positionRight)
+        {
+            spriteRenderer.flipX = true;
             isMovingRight = false;
         }
 
-        if(transform.position.x < positionLeft) {
+        if (transform.position.x < positionLeft)
+        {
             spriteRenderer.flipX = true;
-            isMovingRight = true;  
+            isMovingRight = true;
         }
+
     }
 }

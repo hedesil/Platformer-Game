@@ -12,6 +12,7 @@ public class MenuController : MonoBehaviour
 
     public void ExitGame()
     {
+        Debug.Log("Saliendo del juego");
         Application.Quit();
     }
 }

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip coinSound;
     public AudioClip hurtSound;
     public AudioClip jumpSound;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
         // Player Jump
         if (Input.GetButtonDown("Jump") && isAlive == true)
         {
-            if (movement.m_Grounded)
+            if (movement.m_Grounded == true)
             {
                 Debug.Log("ACTIVAR TRIGGER SALTO");
                 animator.SetTrigger("Jump");
