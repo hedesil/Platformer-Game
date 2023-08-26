@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput = 0f;
     public float speed = 5f;
     public PlayerMovement movement;
-    private bool moveLeft = false;
-    private bool moveRight = false;
+    private bool leftButtonTap = false;
+    private bool rightButtonTap = false;
 
     public bool jumpButtonTap = false;
 
@@ -55,7 +55,15 @@ public class PlayerController : MonoBehaviour
     {
         if (isAlive == true)
         {
-            PlayerMovement(horizontalInput);
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+            {
+                horizontalInput = Input.GetAxisRaw("Horizontal");
+                PlayerMovement(horizontalInput);
+            }
+            else
+            {
+                PlayerMovement(CalculateMovementDirection());
+            }
         }
     }
 
@@ -150,27 +158,50 @@ public class PlayerController : MonoBehaviour
 
     public void MoveLeft()
     {
-        horizontalInput = -1f;
-        Debug.Log("Boton de mover izquierda activado " + horizontalInput);
+        if (isAlive == true)
+        {
+            leftButtonTap = true;
+        }
     }
 
     public void MoveRight()
-    
     {
-        horizontalInput = 1f;
-        Debug.Log("Boton de mover derecha activado " + horizontalInput);
+        if (isAlive == true)
+        {
+            rightButtonTap = true;
+        }
     }
 
-    public void Jump() {
-        if(isAlive == true) {
+    public void Jump()
+    {
+        if (isAlive == true)
+        {
             jumpButtonTap = true;
         }
     }
 
-    public void StopMovement() 
+    public void StopMovement()
     {
         horizontalInput = 0f;
+        leftButtonTap = false;
+        rightButtonTap = false;
         jumpButtonTap = false;
         Debug.Log("Boton se dejo de pulsar");
+    }
+
+    private float CalculateMovementDirection()
+    {
+        if (leftButtonTap == true)
+        {
+            return -1f;
+        }
+        else if (rightButtonTap == true)
+        {
+            return 1f;
+        }
+        else
+        {
+            return 0f;
+        }
     }
 }
