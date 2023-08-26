@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour
     {
         // Player movement
         //horizontalInput = Input.GetAxisRaw("Horizontal");
-        //Debug.Log("Valor de horizontal input " + horizontalInput);
 
         // Player Jump
         PlayerJump();
@@ -81,7 +80,6 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             isAlive = false;
             animator.SetTrigger("Die");
-            Debug.Log("Te la comiste");
         }
 
 
@@ -116,20 +114,18 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         isAlive = false;
+        animator.SetBool("Move", false);
         animator.SetTrigger("Die"); // Pasamos el trigger para que el animator lance el trigger Die
         audioSource.PlayOneShot(hurtSound, 1f);
     }
 
     private void PlayerJump()
     {
-        Debug.Log(Input.GetButtonDown("Jump"));
-
         if ((Input.GetButtonDown("Jump") || jumpButtonTap == true) && isAlive == true)
         {
             jumpButtonTap = false;
             if (movement.m_Grounded == true)
             {
-                Debug.Log("ACTIVAR TRIGGER SALTO");
                 animator.SetTrigger("Jump");
             }
             movement.Jump();
@@ -186,7 +182,6 @@ public class PlayerController : MonoBehaviour
         leftButtonTap = false;
         rightButtonTap = false;
         jumpButtonTap = false;
-        Debug.Log("Boton se dejo de pulsar");
     }
 
     private float CalculateMovementDirection()

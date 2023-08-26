@@ -9,15 +9,21 @@ public class GameManager : MonoBehaviour
 {
     public int totalCoins = 0;
     public int lives = 3;
+
     public Transform spawnPoint;
     public PlayerController player;
     public float timeToRespawn = 2f;
     public float timer = 0;
     public bool isGameOver = false;
     public bool isLevelFinished = false;
+
     public TextMeshProUGUI lifesText;
+
+    public TextMeshProUGUI beersText;
+
     public GameObject levelEndPanel;
     public TextMeshProUGUI levelEndText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +42,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if (lives > 0)
+                if (lives >= 1)
                 {
                     lives--;
                     player.transform.position = spawnPoint.transform.position;
@@ -53,11 +59,8 @@ public class GameManager : MonoBehaviour
 
         if (isGameOver == true || isLevelFinished == true)
         {
-            Rigidbody2D playerPhysic = player.GetComponent<Rigidbody2D>();
-            playerPhysic.velocity = Vector2.zero; 
-
             levelEndPanel.SetActive(true); // Activamos el panel del game over
-
+            
             if (isGameOver)
             {
                 levelEndText.text = "GAME OVER";
@@ -67,13 +70,14 @@ public class GameManager : MonoBehaviour
                 levelEndText.text = "FINISHED";
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.touchCount > 0)
             {
                 SceneManager.LoadScene(0);
             }
         }
 
         lifesText.text = "x" + lives;
+        beersText.text = "x" + totalCoins;
     }
 
     public void FinishLevel()
