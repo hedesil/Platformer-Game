@@ -11,6 +11,11 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput = 0f;
     public float speed = 5f;
     public PlayerMovement movement;
+    private bool moveLeft = false;
+    private bool moveRight = false;
+
+    public bool jumpButtonTap = false;
+
     public bool isAlive = true;
 
     public GameManager manager;
@@ -21,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip coinSound;
     public AudioClip hurtSound;
     public AudioClip jumpSound;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,44 +39,23 @@ public class PlayerController : MonoBehaviour
 
     {
         // Player movement
-        horizontalInput = Input.GetAxisRaw("Horizontal");
+        //horizontalInput = Input.GetAxisRaw("Horizontal");
+        //Debug.Log("Valor de horizontal input " + horizontalInput);
 
         // Player Jump
-        if (Input.GetButtonDown("Jump") && isAlive == true)
-        {
-            if (movement.m_Grounded == true)
-            {
-                Debug.Log("ACTIVAR TRIGGER SALTO");
-                animator.SetTrigger("Jump");
-            }
-            movement.Jump();
-            audioSource.PlayOneShot(jumpSound, 1f);
-        }
+        PlayerJump();
 
         // Set Animations
         animator.SetBool("Grounded", movement.m_Grounded);
         animator.SetBool("IsAlive", isAlive);
 
-        if (horizontalInput == 0)
-        {
-            animator.speed = 1f;
-            animator.SetBool("Move", false);
-        }
-        else
-        {
-            if (isAlive && movement.m_Grounded)
-            {
-                animator.speed = 1 * Mathf.Abs(horizontalInput); // Hacer que con un gamePad la velocidad sea progresiva
-            }
-            animator.SetBool("Move", true);
-        }
     }
 
     void FixedUpdate() // Usamos este FixedUpdate para que el update ocurra independientemente de la gráfica o procesador del ordeandor (en el update simple puede dar errores el movimiento)
     {
         if (isAlive == true)
         {
-            movement.Move(horizontalInput * speed * Time.deltaTime); // deltaTime sería como los "por hora", tiempo que transcurre entre cada frame del juego
+            PlayerMovement(horizontalInput);
         }
     }
 
@@ -126,5 +110,67 @@ public class PlayerController : MonoBehaviour
         isAlive = false;
         animator.SetTrigger("Die"); // Pasamos el trigger para que el animator lance el trigger Die
         audioSource.PlayOneShot(hurtSound, 1f);
+    }
+
+    private void PlayerJump()
+    {
+        Debug.Log(Input.GetButtonDown("Jump"));
+
+        if ((Input.GetButtonDown("Jump") || jumpButtonTap == true) && isAlive == true)
+        {
+            jumpButtonTap = false;
+            if (movement.m_Grounded == true)
+            {
+                Debug.Log("ACTIVAR TRIGGER SALTO");
+                animator.SetTrigger("Jump");
+            }
+            movement.Jump();
+            audioSource.PlayOneShot(jumpSound, 1f);
+        }
+    }
+
+    private void PlayerMovement(float direction)
+    {
+        if (direction == 0)
+        {
+            animator.speed = 1f;
+            animator.SetBool("Move", false);
+        }
+        else
+        {
+            if (isAlive && movement.m_Grounded)
+            {
+                animator.speed = 1 * Mathf.Abs(direction); // Hacer que con un gamePad la velocidad sea progresiva
+                animator.SetBool("Move", true);
+
+            }
+        }
+        movement.Move(direction * speed * Time.deltaTime); // deltaTime sería como los "por hora", tiempo que transcurre entre cada frame del juego
+    }
+
+    public void MoveLeft()
+    {
+        horizontalInput = -1f;
+        Debug.Log("Boton de mover izquierda activado " + horizontalInput);
+    }
+
+    public void MoveRight()
+    
+    {
+        horizontalInput = 1f;
+        Debug.Log("Boton de mover derecha activado " + horizontalInput);
+    }
+
+    public void Jump() {
+        if(isAlive == true) {
+            jumpButtonTap = true;
+        }
+    }
+
+    public void StopMovement() 
+    {
+        horizontalInput = 0f;
+        jumpButtonTap = false;
+        Debug.Log("Boton se dejo de pulsar");
     }
 }

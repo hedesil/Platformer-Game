@@ -12,6 +12,7 @@ TagManager:
   - LevelEnd
   - PoisonedCherry
   - ExitSound
+  - JumpButton
   layers:
   - Default
   - TransparentFX
