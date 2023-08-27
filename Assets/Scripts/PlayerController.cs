@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip hurtSound;
     public AudioClip jumpSound;
 
+    public bool playerCanMove = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,12 +40,8 @@ public class PlayerController : MonoBehaviour
     void Update()
 
     {
-        // Player movement
-        //horizontalInput = Input.GetAxisRaw("Horizontal");
-
         // Player Jump
         PlayerJump();
-
         // Set Animations
         animator.SetBool("Grounded", movement.m_Grounded);
         animator.SetBool("IsAlive", isAlive);
@@ -52,7 +50,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate() // Usamos este FixedUpdate para que el update ocurra independientemente de la gráfica o procesador del ordeandor (en el update simple puede dar errores el movimiento)
     {
-        if (isAlive == true)
+        
+        if (isAlive == true && playerCanMove == true)
         {
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
             {
@@ -77,11 +76,10 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("PoisonedCherry"))
         {
+            Die();
             Destroy(collision.gameObject);
-            isAlive = false;
-            animator.SetTrigger("Die");
+            manager.UpdateHelpText("Has pisao el sarmiento y has echao una potica");
         }
-
 
         if (collision.gameObject.CompareTag("Checkpoint"))
         {
@@ -90,16 +88,20 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("LevelEnd"))
         {
+            playerCanMove = false;
+            animator.SetBool("Move", false);
+            movement.Stop();
             manager.FinishLevel();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Spikes") || collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             if (isAlive)
             {
+                manager.UpdateHelpText("No puedes escapar Tomasín wa-ja-ja-ja");
                 Die();
             }
         }
@@ -113,6 +115,8 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
+        movement.Stop();
+        playerCanMove = false;
         isAlive = false;
         animator.SetBool("Move", false);
         animator.SetTrigger("Die"); // Pasamos el trigger para que el animator lance el trigger Die
@@ -121,14 +125,14 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerJump()
     {
-        if ((Input.GetButtonDown("Jump") || jumpButtonTap == true) && isAlive == true)
+        if ((Input.GetButtonDown("Jump") || jumpButtonTap == true) && isAlive == true && playerCanMove == true)
         {
             jumpButtonTap = false;
             if (movement.m_Grounded == true)
             {
                 animator.SetTrigger("Jump");
+                movement.Jump();
             }
-            movement.Jump();
             audioSource.PlayOneShot(jumpSound, 1f);
         }
     }

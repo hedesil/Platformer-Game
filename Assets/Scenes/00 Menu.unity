@@ -286,7 +286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 85, y: -32}
+  m_AnchoredPosition: {x: 85, y: -38.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &56264134
@@ -326,8 +326,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "BUKKACREW DA GAME \n2"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 55bdd6b177111eb41aa32a455d74f551, type: 2}
+  m_sharedMaterial: {fileID: 1976149252691218575, guid: 55bdd6b177111eb41aa32a455d74f551, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -351,8 +351,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 41.2
+  m_fontSizeBase: 41.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -438,7 +438,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.03, y: 0.8}
   m_AnchorMax: {x: 0.03, y: 0.8}
-  m_AnchoredPosition: {x: 144, y: -13.700012}
+  m_AnchoredPosition: {x: 126.2, y: -13.700012}
   m_SizeDelta: {x: 250, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &289025611
@@ -477,10 +477,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.18039216, g: 0.10980393, b: 0.2392157, a: 1}
+    m_HighlightedColor: {r: 0.52156866, g: 0.2901961, b: 0.38431373, a: 1}
+    m_PressedColor: {r: 0.52156866, g: 0.2901961, b: 0.38431376, a: 1}
+    m_SelectedColor: {r: 0.52156866, g: 0.2901961, b: 0.38431376, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 24729773}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: LoadGameLevel
         m_Mode: 3
@@ -650,7 +650,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 396250236}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2049245035}
+        m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
+        m_MethodName: PauseSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &396250236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2563,15 +2575,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Nivel 1 - Botell\xF3n en el Empire"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 55bdd6b177111eb41aa32a455d74f551, type: 2}
+  m_sharedMaterial: {fileID: 1976149252691218575, guid: 55bdd6b177111eb41aa32a455d74f551, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2781,8 +2793,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\xBFYa te vas Tomas\xEDn?"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 55bdd6b177111eb41aa32a455d74f551, type: 2}
+  m_sharedMaterial: {fileID: 1976149252691218575, guid: 55bdd6b177111eb41aa32a455d74f551, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3141,6 +3153,7 @@ GameObject:
   - component: {fileID: 2049245030}
   - component: {fileID: 2049245033}
   - component: {fileID: 2049245034}
+  - component: {fileID: 2049245035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3285,7 +3298,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e243fa53066ccad47800a23df518d133, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
@@ -3370,6 +3383,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2049245035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049245029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c87fef4f23d8e47a34c6fa848b9019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 2049245034}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

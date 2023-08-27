@@ -125,4 +125,9 @@ public class PlayerMovement : MonoBehaviour {
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }
     }
+
+    public void Stop() {
+        Debug.Log("La velocidad actual del player es " + m_Rigidbody2D.velocity);
+        m_Rigidbody2D.AddForce(-m_Rigidbody2D.velocity, ForceMode2D.Impulse);
+    }
 }

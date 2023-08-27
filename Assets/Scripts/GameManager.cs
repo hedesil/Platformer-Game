@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI beersText;
 
     public GameObject levelEndPanel;
+
+    public TextMeshProUGUI helpText;
+
+    private string originalHelpText = "Consigue llegar a casa bebiendo el mayor número de Steinburg sin que te atrape Fermín";
+
     public TextMeshProUGUI levelEndText;
 
 
@@ -47,7 +53,9 @@ public class GameManager : MonoBehaviour
                     lives--;
                     player.transform.position = spawnPoint.transform.position;
                     player.isAlive = true;
+                    player.playerCanMove = true;
                     timer = 0;
+                    UpdateHelpText(originalHelpText);
                     Debug.Log("Te quedan " + lives + " vidas.");
                 }
                 else
@@ -60,7 +68,7 @@ public class GameManager : MonoBehaviour
         if (isGameOver == true || isLevelFinished == true)
         {
             levelEndPanel.SetActive(true); // Activamos el panel del game over
-            
+
             if (isGameOver)
             {
                 levelEndText.text = "GAME OVER";
@@ -84,5 +92,13 @@ public class GameManager : MonoBehaviour
     {
         isLevelFinished = true;
     }
+
+    public void UpdateHelpText(string text) {
+        helpText.text = text; 
+    }
+
+
+    
+    
 }
 
